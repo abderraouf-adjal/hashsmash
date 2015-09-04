@@ -1,0 +1,33 @@
+HashSmash
+
+Hash brute-force tool using OpenSSL library.
+
+Using Unix philosophy and pure C for CPU without any optimization like
+SSE or multithreading. So it is slow brute-force tool.
+
+HashSmash can benefit from multithreading by some script that
+run HashSmash in more than thread to distribute the possibilities
+by 'start_bytes_hex' and 'end_bytes_hex' in HashSmash command line.
+
+However you can learn how brute-force tools work from HashSmash code.
+
+Usage:
+  bin/hashsmash_HASH expected_bytes_number min_char max_char hash [start_bytes_hex] [end_bytes_hex]
+
+* expected_bytes_number: Expected bytes number
+* min_char: The smallest possible byte number
+* max_char: The biggest possible byte number
+
+Get the bytes number from <http://www.asciitable.pro/ascii_table.htm>
+
+Examples:
+
+* 4 bytes 0-9,A-Z,a-z :
+  $ bin/hashsmash_sha256 4 48 122 c6e8cf4468731d72957fbe7a42dd6a92b362f5eaab3249998b7d0a6bf19748e6
+  String: 'K9DT'
+  In Hex: 4b394454
+
+* 10 byte, start searching from 'JJJJJJJJJJ' left for 0-9,A-Z,a-z :
+  $ bin/hashsmash_sha256 10 48 122 02235902ba0a6881fa078c655080744f95d5f0b5ca38b154b984ea4115949553 4A4A4A4A4A4A4A4A4A4A
+  String: 'Z4pJJJJJJJ'
+  In Hex: 5a34704a4a4a4a4a4a4a
